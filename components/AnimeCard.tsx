@@ -1,4 +1,9 @@
 import Image from "next/image";
+import { MotionDiv } from "./MotionDiv";
+const variant = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
 
 export interface AnimeProp {
   id: string;
@@ -17,8 +22,14 @@ interface Prop {
   index: number;
 }
 
-function AnimeCard({ anime }: Prop) {
+function AnimeCard({ anime,index }: Prop) {
   return (
+    <MotionDiv
+            variants={variant}
+            initial="hidden"
+            animate="show"
+            transition={{ duration: 1, delay: (index%8) * 0.1 }}
+          >
     <div className="max-w-sm rounded relative w-full">
       <div className="relative w-full h-[37vh]">
         <Image
@@ -65,6 +76,8 @@ function AnimeCard({ anime }: Prop) {
         </div>
       </div>
     </div>
+    </MotionDiv>
+
   );
 }
 
